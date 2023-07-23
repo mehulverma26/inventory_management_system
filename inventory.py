@@ -1,84 +1,85 @@
 from tkinter import *
 from tkinter import ttk
 
+
 def print():
     tott = float(totText.get())
     top = Toplevel()
     top.geometry("500x500")
 
     top.config(bg="white")
-    l = Label(top, text='---------RECIEPT----------')
+    l = Label(top, text="---------RECIEPT----------")
     l.pack()
     l.config(bg="white")
-    heading = Label(top, text='\tItem\tPRICE\tQTY\tTOTAL')
+    heading = Label(top, text="\tItem\tPRICE\tQTY\tTOTAL")
     heading.pack()
     heading.config(bg="white")
 
     for child in listBox.get_children():
-        item = (listBox.item(child, 'values')[0])
-        price = float(listBox.item(child, 'values')[1])
-        qty = float(listBox.item(child, 'values')[2])
-        tot = float(listBox.item(child, 'values')[3])
-        item1 = Label(top, text=f'{item}\t{price}\t{qty}\t{tot}')
+        item = listBox.item(child, "values")[0]
+        price = float(listBox.item(child, "values")[1])
+        qty = float(listBox.item(child, "values")[2])
+        tot = float(listBox.item(child, "values")[3])
+        item1 = Label(top, text=f"{item}\t{price}\t{qty}\t{tot}")
         item1.config(bg="white")
         item1.pack()
 
-    tot = Label(top, text=f'Total\t{tott}')
+    tot = Label(top, text=f"Total\t{tott}")
     tot.config(bg="white")
     tot.pack()
 
 
 def show():
     tot = 0
-    if (var1.get()):
+    if var1.get():
         price = int(e1.get())
         qty = int(e6.get())
         tot = int(price * qty)
-        tempList = [['Coca Cola', e1.get(), e6.get(), tot]]
+        tempList = [["Coca Cola", e1.get(), e6.get(), tot]]
         tempList.sort(key=lambda e: e[1], reverse=True)
         for i, (item, price, qty, tot) in enumerate(tempList, start=1):
             listBox.insert("", "end", values=(item, price, qty, tot))
 
-    if (var2.get()):
+    if var2.get():
         price = int(e2.get())
         qty = int(e7.get())
         tot = int(price * qty)
-        tempList = [['Bun', e2.get(), e7.get(), tot]]
+        tempList = [["Bun", e2.get(), e7.get(), tot]]
         tempList.sort(key=lambda e: e[1], reverse=True)
         for i, (item, price, qty, tot) in enumerate(tempList, start=1):
             listBox.insert("", "end", values=(item, price, qty, tot))
 
-    if (var3.get()):
+    if var3.get():
         price = int(e3.get())
         qty = int(e8.get())
         tot = int(price * qty)
-        tempList = [['Chicken Fry', e3.get(), e8.get(), tot]]
+        tempList = [["Chicken Fry", e3.get(), e8.get(), tot]]
         tempList.sort(key=lambda e: e[1], reverse=True)
         for i, (item, price, qty, tot) in enumerate(tempList, start=1):
             listBox.insert("", "end", values=(item, price, qty, tot))
 
-    if (var4.get()):
+    if var4.get():
         price = int(e4.get())
         qty = int(e9.get())
         tot = int(price * qty)
-        tempList = [['Roll', e4.get(), e9.get(), tot]]
+        tempList = [["Roll", e4.get(), e9.get(), tot]]
         tempList.sort(key=lambda e: e[1], reverse=True)
 
         for i, (item, price, qty, tot) in enumerate(tempList, start=1):
             listBox.insert("", "end", values=(item, price, qty, tot))
 
-    if (var5.get()):
+    if var5.get():
         price = int(e5.get())
         qty = int(e10.get())
         tot = int(price * qty)
-        tempList = [['Fish Fried Rice', e5.get(), e10.get(), tot]]
+        tempList = [["Fish Fried Rice", e5.get(), e10.get(), tot]]
         tempList.sort(key=lambda e: e[1], reverse=True)
         for i, (item, price, qty, tot) in enumerate(tempList, start=1):
             listBox.insert("", "end", values=(item, price, qty, tot))
 
     sum1 = 0.0
     for child in listBox.get_children():
-        sum1 += float(listBox.item(child, 'values')[3])
+        sum1 += float(listBox.item(child, "values")[3])
     totText.set(sum1)
 
 
@@ -95,7 +96,12 @@ global balText
 totText = StringVar()
 balText = IntVar()
 
-Label(root, text="Bill Print Inventory System using Python", font="arial 22 bold" ,bg="white").place(x=5, y=10)
+Label(
+    root,
+    text="Bill Print Inventory System using Python",
+    font="arial 22 bold",
+    bg="white",
+).place(x=5, y=10)
 
 
 var1 = IntVar()
@@ -113,7 +119,6 @@ Checkbutton(root, text="Roll", variable=var4).place(x=10, y=140)
 var5 = IntVar()
 Checkbutton(root, text=" Fish Fried Rice  ", variable=var5).place(x=10, y=170)
 Label(root, text="Total").place(x=600, y=10)
-
 
 
 e1 = Entry(root)
@@ -150,13 +155,11 @@ tot = Label(root, text="", font="arial 22 bold", textvariable=totText)
 tot.place(x=650, y=10)
 
 
-
-
 Button(root, text="Add", command=show, height=3, width=13).place(x=10, y=220)
 
 Button(root, text="Print", command=print, height=3, width=13).place(x=850, y=120)
-cols = ('item', 'price', 'qty', 'total')
-listBox = ttk.Treeview(root, columns=cols, show='headings')
+cols = ("item", "price", "qty", "total")
+listBox = ttk.Treeview(root, columns=cols, show="headings")
 
 for col in cols:
     listBox.heading(col, text=col)
